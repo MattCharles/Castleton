@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Assets.Scripts.Common;
+using System.Linq;
 
 public class Block : MonoBehaviour {
 
@@ -32,11 +33,11 @@ public class Block : MonoBehaviour {
 
     public void CheckMove()
     {
-        float x = Input.GetAxis("Horizontal") * Constants.XZ_BLOCK_MOVE_SPEED;
-        float z = Input.GetAxis("Vertical") * Constants.XZ_BLOCK_MOVE_SPEED;
+        float x = Input.GetAxis("Horizontal") * Constants.BLOCK_PLACE_SPEED[(int)Constants.Coords.x];
+        float z = Input.GetAxis("Vertical") * Constants.BLOCK_PLACE_SPEED[(int)Constants.Coords.z];
 
         //z axis
-        float y = Input.GetKey(KeyCode.Z) || Input.GetKey(KeyCode.X) ? (1f * Constants.Y_BLOCK_MOVE_SPEED) : 0f;
+        float y = Input.GetKey(KeyCode.Z) || Input.GetKey(KeyCode.X) ? (1f * Constants.BLOCK_PLACE_SPEED[(int)Constants.Coords.y]) : 0f;
         //z direct
         y = Input.GetKey(KeyCode.X) ? -y : y;
 
@@ -45,8 +46,17 @@ public class Block : MonoBehaviour {
 
     public void CheckOutOfBounds()
     {
- 
-        if (gameObject.transform.position.y <= Constants.BLOCK_OUT_OF_BOUNDS_Y)
+        bool[] outOfBounds = 
+        {
+            gameObject.transform.position.x <= Constants.BLOCK_BOUNDS_LOWER[(int)Constants.Coords.x],
+            gameObject.transform.position.x >= Constants.BLOCK_BOUNDS_UPPER[(int)Constants.Coords.x],
+            gameObject.transform.position.z <= Constants.BLOCK_BOUNDS_LOWER[(int)Constants.Coords.z],
+            gameObject.transform.position.z >= Constants.BLOCK_BOUNDS_UPPER[(int)Constants.Coords.z],
+            gameObject.transform.position.y <= Constants.BLOCK_BOUNDS_LOWER[(int)Constants.Coords.y],
+            gameObject.transform.position.y >= Constants.BLOCK_BOUNDS_UPPER[(int)Constants.Coords.y]
+        };
+
+        if (outOfBounds.Contains(true))
         {
             Destroy(gameObject);
             
