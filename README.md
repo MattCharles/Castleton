@@ -30,4 +30,4 @@ merge and do prs, name branches with your name/topic
 
 [Trello Board](https://trello.com/b/SsozsEoj/castleton)  
 [Basic Structure](https://docs.google.com/presentation/d/1BecJwL0Y0D2H8KSTEiCIrvznbzvSIQGzAETYimkmITw/edit#slide=id.p)  
-[Unity version](unityhub://2018.2.17f1/88933597c842)
+[Unity version](https://unity3d.com/get-unity/download/archive?_ga=2.44856292.1772113876.1543684888-367692921.1543684888)
