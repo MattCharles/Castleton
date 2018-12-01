@@ -6,6 +6,7 @@ public class Computer : MonoBehaviour, IActor
     public Inventory inventory;
     public ActorState state;
     public GameObject MyPlatform;
+    public Vector3 TargetPlatform;
     public float centerToSpawnEdge = 5f;
     public GameObject Cannon;
 
@@ -40,8 +41,7 @@ public class Computer : MonoBehaviour, IActor
         state = ActorState.Shooting;
         foreach(Block block in inventory.shootingBlocks)
         {
-            //Cannon.Shoot(block);
-            //  transform or something?
+            Cannon.AIShoots(Block, TargetPlatform);
         }
     }
 
