@@ -7,17 +7,30 @@ namespace Assets.Scripts.Common
 {
     public static class Constants
     {
-        public enum Coords : int
+
+        public static class BlockPlaceSpeed
         {
-            x = 0,
-            z = 1,
-            y = 2
+            public static float x = 1f;
+            public static float z = 1f;
+            public static float y = 1f;
         }
 
-        //if you have a problem with these not being constant, stiff
-        public static float[] BLOCK_PLACE_SPEED = { 1f, 1f, 1f };
-        public static float[] BLOCK_BOUNDS_UPPER = { 20f, 10f, 500f };
-        public static float[] BLOCK_BOUNDS_LOWER = { -20f, -10f, -2f };
+        public static class BlockBounds
+        {
+            public static class Upper
+            {
+                public static float x = 20f;
+                public static float z = 10f;
+                public static float y = 500f;
+            }
+
+            public static class Lower
+            {
+                public static float x = -20f;
+                public static float z = -10f;
+                public static float y = -2f;
+            }
+        }
 
     }
 }
