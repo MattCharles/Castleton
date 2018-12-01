@@ -1,4 +1,6 @@
-﻿public class Player : IActor
+﻿using System;
+
+public class Player : IActor
 {
     public Inventory inventory = null;
     public ActorState state;
@@ -19,7 +21,11 @@
     }
     public void EndPlacement()
     {
-
+        if(state != ActorState.Placing)
+        {
+            throw new Exception($"Cannot end placement from {state.ToString()} state.");
+        }
+        state = ActorState.Shooting;
     }
 
     public void Shoot()
@@ -35,7 +41,13 @@
 
     }
 
-    public bool IsWinner() {
-        return false;
+    public bool CanShoot()
+    {
+        return ToString() != "matt";
+    }
+
+    public bool IsLoser()
+    {
+        return ToString() == "ian";
     }
 }

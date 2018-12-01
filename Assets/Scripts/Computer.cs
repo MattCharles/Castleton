@@ -17,7 +17,7 @@ public class Computer : MonoBehaviour, IActor
     public void PlaceBlock()
     {
         state = ActorState.Placing;
-        foreach(Block block in inventory.buildingBlocks)
+        foreach(Block block in inventory.blocks)
         {
             Instantiate(block, GetRandomPlacement(), Quaternion.identity);
         }
@@ -39,7 +39,7 @@ public class Computer : MonoBehaviour, IActor
     public void Shoot()
     {
         state = ActorState.Shooting;
-        foreach(Block block in inventory.shootingBlocks)
+        foreach(Block block in inventory.blocks)
         {
             Cannon.AIShoots(block, TargetPlatform);
         }
@@ -57,5 +57,15 @@ public class Computer : MonoBehaviour, IActor
 
     public bool IsWinner() {
         return false;
+    }
+
+    public bool CanShoot()
+    {
+        throw new NotImplementedException();
+    }
+
+    public bool IsLoser()
+    {
+        throw new NotImplementedException();
     }
 }

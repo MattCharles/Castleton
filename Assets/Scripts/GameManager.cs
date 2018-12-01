@@ -9,12 +9,12 @@ public class GameManager : MonoBehaviour
 
     public static GameManager instance = null; // Static instance of GameManager which allows it to be accessed by any other script.
 
-    public Player player   = null;          // Store a reference to player
-    public Player computer = null;          // Store a reference to the computer
-    public World world;                     // Store a reference to the world
-    public List<Block> blockSet;            // Store a reference to the set of blocks
+    public Player player   = null;  // Store a reference to player
+    public Player computer = null;  // Store a reference to the computer
+    public World world;             // Store a reference to the world
+    public HashSet<Block> blockSet; // Store a reference to the set of blocks
 
-    public bool isPlayer1Turn;              // Store whose turn
+    public bool isPlayerTurn; // Store whose turn
 
     //Awake is always called before any Start functions
     void Awake()
@@ -34,8 +34,44 @@ public class GameManager : MonoBehaviour
     {
         CreatePlayers();
         PlaceBlocks();
-        Shoot();
+        ShootBlocks();
         Die();
+    }
+
+    private void CreatePlayers()
+    {
+        player   = player   ?? new Player(new Inventory(blockSet));
+        computer = computer ?? new Player(new Inventory(blockSet));
+    }
+
+    private void PlaceBlocks()
+    {
+        while(player.state != ActorState.Shooting && computer.state != ActorState.Shooting)
+        {
+            if(isPlayerTurn && player.state == ActorState.Placing)
+            {
+                player.ShowInventory();
+            }
+            else if(!isPlayerTurn && computer.state == ActorState.Placing)
+            {
+                computer.ShowInventory();
+            }
+        }
+    }
+
+    private void ShootBlocks()
+    {
+        while(player.state != ActorState.doneShooting && computer.state != ActorState.doneShooting)
+        {
+            if(isPlayerTurn && player.CanShoot() && !player.IsLoser())
+            {
+                player.ShowInventory();
+            }
+            else if(!isPlayerTurn && computer.CanShoot() && !computer.IsLoser())
+            {
+                computer.ShowInventory();
+            }
+        }
     }
 
     private void Die()
@@ -43,28 +79,12 @@ public class GameManager : MonoBehaviour
         throw new NotImplementedException();
     }
 
-    private void Shoot()
-    {
-        throw new NotImplementedException();
-    }
-
-    private void PlaceBlocks()
-    {
-        throw new NotImplementedException();
-    }
-
-    private void CreatePlayers()
-    {
-        player =   player   == null ? new Player(new Inventory(blockSet, null)) : player;
-        computer = computer == null ? new Player(new Inventory(blockSet, null)) : computer;
-    }
-
     //Update is called every frame.
     void Update()
     {
-        if (player.IsWinner())
+        if (player.IsLoser())
             throw new NotImplementedException();
-        else if (computer.IsWinner())
+        else if (computer.IsLoser())
             throw new NotImplementedException();
     }
 }
