@@ -3,33 +3,33 @@
     public Inventory inventory;
     public ActorState state;
 
-    public void moveCamera()
+    public void MoveCamera()
     {
 
     }
-    public void placeBlock()
+    public void PlaceBlock()
     {
 
     }
-    public void endPlacement()
-    {
-
-    }
-
-    public void shoot()
-    {
-
-    }
-    public void showInventory()
-    {
-
-    }
-    public void die()
+    public void EndPlacement()
     {
 
     }
 
-    public bool isWinner() {
+    public void Shoot()
+    {
+
+    }
+    public void ShowInventory()
+    {
+
+    }
+    public void Die()
+    {
+
+    }
+
+    public bool IsWinner() {
         return false;
     }
 }

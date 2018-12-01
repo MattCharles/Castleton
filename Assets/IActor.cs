@@ -1,12 +1,12 @@
 ﻿public interface IActor
 {
-    void die();
-    void endPlacement();
-    bool isWinner();
-    void moveCamera();
-    void placeBlock();
-    void shoot();
-    void showInventory();
+    void Die();
+    void EndPlacement();
+    bool IsWinner();
+    void MoveCamera();
+    void PlaceBlock();
+    void Shoot();
+    void ShowInventory();
 }
 
 public enum ActorState

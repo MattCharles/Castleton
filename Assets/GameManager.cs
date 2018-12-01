@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     public Player player;                   // Store a reference to player
     public Player computer;                 // Store a reference to the computer
     public World world;                     // Store a reference to the world
-    public List<List<Block>> blockSets;     // Store a reference to the possible sets of blocks
+    public List<Block> blockSet;            // Store a reference to the set of blocks
 
     public bool isPlayer1Turn;              // Store whose turn
 
@@ -67,9 +67,9 @@ public class GameManager : MonoBehaviour
     //Update is called every frame.
     void Update()
     {
-        if (player.isWinner())
+        if (player.IsWinner())
             throw new NotImplementedException();
-        else if (computer.isWinner())
+        else if (computer.IsWinner())
             throw new NotImplementedException();
     }
 }
