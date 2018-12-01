@@ -23,7 +23,7 @@ public class Player : IActor
     {
         if(state != ActorState.Placing)
         {
-            throw new Exception($"Cannot end placement from {state.ToString()} state.");
+            throw new Exception("Cannot end placement from " + state.ToString() + "state.");
         }
         state = ActorState.Shooting;
     }
