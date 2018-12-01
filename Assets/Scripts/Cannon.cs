@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-class Cannon : MonoBehaviour
+public class Cannon : MonoBehaviour
 {
     public Vector3 NozzlePosition;
     public float perscription = 1f;
