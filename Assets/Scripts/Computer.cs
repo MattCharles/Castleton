@@ -61,11 +61,11 @@ public class Computer : MonoBehaviour, IActor
 
     public bool CanShoot()
     {
-        throw new NotImplementedException();
+        return true;
     }
 
     public bool IsLoser()
     {
-        throw new NotImplementedException();
+        return false;
     }
 }

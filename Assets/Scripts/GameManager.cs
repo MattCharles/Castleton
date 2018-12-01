@@ -3,6 +3,7 @@ using System.Collections;
 
 using System.Collections.Generic;       //Allows us to use Lists. 
 using System;
+using System.Linq;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,10 +12,9 @@ public class GameManager : MonoBehaviour
 
     public Player player   = null;  // Store a reference to player
     public Player computer = null;  // Store a reference to the computer
-    public World world;             // Store a reference to the world
     public HashSet<Block> blockSet; // Store a reference to the set of blocks
 
-    public bool isPlayerTurn; // Store whose turn
+    public bool isPlayerTurn = true; // Store whose turn
 
     //Awake is always called before any Start functions
     void Awake()
@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
         CreatePlayers();
         PlaceBlocks();
         ShootBlocks();
-        Die();
+        EndGame();
     }
 
     private void CreatePlayers()
@@ -46,45 +46,71 @@ public class GameManager : MonoBehaviour
 
     private void PlaceBlocks()
     {
-        while(player.state != ActorState.Shooting && computer.state != ActorState.Shooting)
+        while(player.state == ActorState.Placing || computer.state == ActorState.Placing)
         {
-            if(isPlayerTurn && player.state == ActorState.Placing)
+            if(isPlayerTurn)
             {
-                player.ShowInventory();
+                if(player.state == ActorState.Placing)
+                {
+                    player.ShowInventory();
+                }
+                else if(player.state == ActorState.Shooting)
+                {
+                    player.HideInventory();
+                    isPlayerTurn = false;
+                }
             }
-            else if(!isPlayerTurn && computer.state == ActorState.Placing)
+            if(!isPlayerTurn)
             {
-                computer.ShowInventory();
+                if(computer.state == ActorState.Placing)
+                {
+                    computer.ShowInventory();
+                }
+                else if(computer.state == ActorState.Shooting)
+                {
+                    computer.HideInventory();
+                    isPlayerTurn = true;
+                }
             }
         }
+
+        player.HideInventory();
+        computer.HideInventory();
+        isPlayerTurn = true; // player always gets to shoot first
     }
 
     private void ShootBlocks()
     {
-        while(player.state != ActorState.doneShooting && computer.state != ActorState.doneShooting)
+        while(player.state != ActorState.doneShooting || computer.state != ActorState.doneShooting)
         {
-            if(isPlayerTurn && player.CanShoot() && !player.IsLoser())
+            if(player.IsLoser() || computer.IsLoser()) {
+                return;
+            }
+            else if(isPlayerTurn && player.CanShoot())
             {
                 player.ShowInventory();
+                player.Shoot();
+                player.HideInventory();
+                isPlayerTurn = false;
             }
-            else if(!isPlayerTurn && computer.CanShoot() && !computer.IsLoser())
+            else if(!isPlayerTurn && computer.CanShoot())
             {
                 computer.ShowInventory();
+                computer.Shoot();
+                computer.HideInventory();
+                isPlayerTurn = true;
             }
         }
     }
-
-    private void Die()
+    private void EndGame()
     {
-        throw new NotImplementedException();
-    }
-
-    //Update is called every frame.
-    void Update()
-    {
-        if (player.IsLoser())
-            throw new NotImplementedException();
-        else if (computer.IsLoser())
-            throw new NotImplementedException();
+        if(player.IsLoser() || player.inventory.GetBlockCount() <= computer.inventory.GetBlockCount())
+        {
+            // You lose screen.
+        }
+        else
+        {
+            // You win screen.
+        }
     }
 }
