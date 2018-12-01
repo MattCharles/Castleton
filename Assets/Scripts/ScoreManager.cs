@@ -9,4 +9,3 @@ public class ScoreManager : MonoBehaviour {
         GetComponent<TextMeshProUGUI>().SetText(score.ToString());
 	}
 }
- 
