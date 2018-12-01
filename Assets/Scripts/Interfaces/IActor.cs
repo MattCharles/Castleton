@@ -2,11 +2,12 @@
 {
     void Die();
     void EndPlacement();
-    bool IsWinner();
     void MoveCamera();
     void PlaceBlock();
     void Shoot();
     void ShowInventory();
+    bool CanShoot();
+    bool IsLoser();
 }
 
 public enum ActorState

@@ -2,12 +2,12 @@
 
 public class Inventory
 {
-    public List<Block> buildingBlocks;
-    public List<Block> shootingBlocks;
+    public List<Block> available;
+    public List<Block> placed;
+    public List<Block> shot;
 
-    public Inventory(List<Block> buildingBlocks, List<Block> shootingBlocks)
+    public Inventory(List<Block> blocks)
     {
-        this.buildingBlocks = buildingBlocks;
-        this.shootingBlocks = shootingBlocks;
+        this.available = blocks;
     }
 }
