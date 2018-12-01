@@ -2,12 +2,10 @@
 
 public class Inventory
 {
-    public List<Block> available;
-    public List<Block> placed;
-    public List<Block> shot;
+    public HashSet<Block> blocks;
 
-    public Inventory(List<Block> blocks)
+    public Inventory(HashSet<Block> blocks)
     {
-        this.available = blocks;
+        this.blocks = blocks;
     }
 }

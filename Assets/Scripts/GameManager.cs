@@ -9,10 +9,10 @@ public class GameManager : MonoBehaviour
 
     public static GameManager instance = null; // Static instance of GameManager which allows it to be accessed by any other script.
 
-    public Player player   = null; // Store a reference to player
-    public Player computer = null; // Store a reference to the computer
-    public World world;            // Store a reference to the world
-    public List<Block> blockSet;   // Store a reference to the set of blocks
+    public Player player   = null;  // Store a reference to player
+    public Player computer = null;  // Store a reference to the computer
+    public World world;             // Store a reference to the world
+    public HashSet<Block> blockSet; // Store a reference to the set of blocks
 
     public bool isPlayerTurn; // Store whose turn
 
@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour
 
     private void PlaceBlocks()
     {
-        while(player.state != ActorState.donePlacing && computer.state != ActorState.donePlacing)
+        while(player.state != ActorState.Shooting && computer.state != ActorState.Shooting)
         {
             if(isPlayerTurn && player.state == ActorState.Placing)
             {
