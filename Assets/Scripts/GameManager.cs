@@ -9,8 +9,8 @@ public class GameManager : MonoBehaviour
 
     public static GameManager instance = null; // Static instance of GameManager which allows it to be accessed by any other script.
 
-    public Player player;                   // Store a reference to player
-    public Player computer;                 // Store a reference to the computer
+    public Player player   = null;          // Store a reference to player
+    public Player computer = null;          // Store a reference to the computer
     public World world;                     // Store a reference to the world
     public List<Block> blockSet;            // Store a reference to the set of blocks
 
@@ -33,7 +33,6 @@ public class GameManager : MonoBehaviour
     void InitGame()
     {
         CreatePlayers();
-        FillInventories();
         PlaceBlocks();
         Shoot();
         Die();
@@ -54,14 +53,10 @@ public class GameManager : MonoBehaviour
         throw new NotImplementedException();
     }
 
-    private void FillInventories()
-    {
-        throw new NotImplementedException();
-    }
-
     private void CreatePlayers()
     {
-        throw new NotImplementedException();
+        player =   player   == null ? new Player(new Inventory(blockSet, null)) : player;
+        computer = computer == null ? new Player(new Inventory(blockSet, null)) : computer;
     }
 
     //Update is called every frame.
