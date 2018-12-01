@@ -8,7 +8,7 @@ public class Computer : MonoBehaviour, IActor
     public GameObject MyPlatform;
     public Vector3 TargetPlatform;
     public float centerToSpawnEdge = 5f;
-    public GameObject Cannon;
+    public Cannon Cannon;
 
     public void MoveCamera()
     {
@@ -41,7 +41,7 @@ public class Computer : MonoBehaviour, IActor
         state = ActorState.Shooting;
         foreach(Block block in inventory.shootingBlocks)
         {
-            Cannon.AIShoots(Block, TargetPlatform);
+            Cannon.AIShoots(block, TargetPlatform);
         }
     }
 

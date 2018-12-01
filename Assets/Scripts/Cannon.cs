@@ -6,7 +6,7 @@ class Cannon : MonoBehaviour
     public float perscription = 1f;
     public float explosiveness = 40f;
     public float explosiveVariance = 5f;
-    void AIShoots(Block block, Vector3 target)
+    public void AIShoots(Block block, Vector3 target)
     {
         Block shot = Instantiate(block, NozzlePosition, Quaternion.identity);
         Vector3 destination = AIAim(target);
@@ -15,7 +15,7 @@ class Cannon : MonoBehaviour
         shot.GetComponent<Rigidbody>().AddForce(destination * force);
     }
 
-    void Shoot(Block block, Vector3 forceVector)
+    public void Shoot(Block block, Vector3 forceVector)
     {
         Block shot = Instantiate(block, NozzlePosition, Quaternion.identity);
         shot.transform.LookAt(forceVector);
