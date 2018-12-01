@@ -25,3 +25,8 @@ Claudia
 # best practices
 
 merge and do prs, name branches with your name/topic
+
+# useful links
+
+[Trello Board](https://trello.com/b/SsozsEoj/castleton)
+[Basic Structure](https://docs.google.com/presentation/d/1BecJwL0Y0D2H8KSTEiCIrvznbzvSIQGzAETYimkmITw/edit#slide=id.p)
