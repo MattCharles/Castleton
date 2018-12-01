@@ -2,16 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Assets.Scripts.Common;
+using System.Linq;
 
 public class Block : MonoBehaviour {
 
 
+    bool isDestroyed;
     bool isSelected;
+    GameObject blockObj;
 
 	// Use this for initialization
 	void Start ()
     {
-
+        blockObj = gameObject.transform.GetChild(0).gameObject;
+        isDestroyed = false;
         isSelected = false;
 
 	}
@@ -19,6 +23,8 @@ public class Block : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
+        if (isDestroyed) return;
+
         CheckOutOfBounds();
 
         CheckClick();
@@ -32,29 +38,45 @@ public class Block : MonoBehaviour {
 
     public void CheckMove()
     {
-        float x = Input.GetAxis("Horizontal") * Constants.XZ_BLOCK_MOVE_SPEED;
-        float z = Input.GetAxis("Vertical") * Constants.XZ_BLOCK_MOVE_SPEED;
+        if (isDestroyed) return;
+
+        float x = Input.GetAxis("Horizontal") * Constants.BlockPlaceSpeed.x;
+        float z = Input.GetAxis("Vertical") * Constants.BlockPlaceSpeed.y;
 
         //z axis
-        float y = Input.GetKey(KeyCode.Z) || Input.GetKey(KeyCode.X) ? (1f * Constants.Y_BLOCK_MOVE_SPEED) : 0f;
+        float y = Input.GetKey(KeyCode.Z) || Input.GetKey(KeyCode.X) ? 1f * Constants.BlockPlaceSpeed.y : 0f;
         //z direct
         y = Input.GetKey(KeyCode.X) ? -y : y;
 
-        transform.Translate(x * Time.deltaTime, y * Time.deltaTime, z * Time.deltaTime);
+        blockObj.transform.Translate(x * Time.deltaTime, y * Time.deltaTime, z * Time.deltaTime);
+        blockObj.GetComponent<Rigidbody>().AddForce(new Vector3(0f, 0f, 0f));
     }
 
     public void CheckOutOfBounds()
     {
- 
-        if (gameObject.transform.position.y <= Constants.BLOCK_OUT_OF_BOUNDS_Y)
+        if (isDestroyed) return;
+
+        bool[] outOfBounds = 
         {
-            Destroy(gameObject);
-            
+            blockObj.transform.position.x <= Constants.BlockBounds.Lower.x,
+            blockObj.transform.position.x >= Constants.BlockBounds.Upper.x,
+            blockObj.transform.position.z <= Constants.BlockBounds.Lower.z,
+            blockObj.transform.position.z >= Constants.BlockBounds.Upper.z,
+            blockObj.transform.position.y <= Constants.BlockBounds.Lower.y,
+            blockObj.transform.position.y >= Constants.BlockBounds.Upper.y
+        };
+
+        if (outOfBounds.Contains(true))
+        {
+            Destroy(blockObj);
+            isDestroyed = true;
         }
     }
 
     public void CheckClick()
     {
+        if (isDestroyed) return;
+
         if (Input.GetMouseButtonDown(0))
         {
             RaycastHit hit;
@@ -87,16 +109,25 @@ public class Block : MonoBehaviour {
 
     public void Select()
     {
-        GetComponent<Renderer>().material.color = Color.yellow;
-        GetComponent<Rigidbody>().useGravity = false;
+        if (isDestroyed) return;
+
+        //blockObj.transform.rotation.Set(0f, 0f, 0f, 0f);
+        blockObj.GetComponent<Rigidbody>().velocity = new Vector3(0f, 0f, 0f);
+        blockObj.GetComponent<Renderer>().material.color = Color.yellow;
+        blockObj.GetComponent<Rigidbody>().useGravity = false;
+        blockObj.GetComponent<Rigidbody>().freezeRotation = true;
         isSelected = true;
     }
 
     public void DeSelect()
     {
-        GetComponent<Renderer>().material.color = Color.white;
+        if (isDestroyed) return;
+
+        blockObj.GetComponent<Renderer>().material.color = Color.white;
+        blockObj.GetComponent<Rigidbody>().useGravity = true;
+        blockObj.GetComponent<Rigidbody>().freezeRotation = false;
         isSelected = false;
-        GetComponent<Rigidbody>().useGravity = true;
+        
     }
 
 
