@@ -11,5 +11,5 @@
 
 public enum ActorState
 {
-    Placing, Shooting, Dead
+    Placing, donePlacing, Shooting, doneShooting, Dead
 }

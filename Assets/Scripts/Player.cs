@@ -1,7 +1,13 @@
 ﻿public class Player : IActor
 {
-    public Inventory inventory;
+    public Inventory inventory = null;
     public ActorState state;
+
+    public Player(Inventory inventory)
+    {
+        this.inventory = inventory;
+        this.state = ActorState.Placing;
+    }
 
     public void MoveCamera()
     {

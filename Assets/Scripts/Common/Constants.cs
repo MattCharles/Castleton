@@ -7,8 +7,30 @@ namespace Assets.Scripts.Common
 {
     public static class Constants
     {
-        public const float XZ_BLOCK_MOVE_SPEED = 1f;
-        public const float Y_BLOCK_MOVE_SPEED = 1f;
-        public const float BLOCK_OUT_OF_BOUNDS_Y = -2.0f;
+
+        public static class BlockPlaceSpeed
+        {
+            public static float x = 1f;
+            public static float z = 1f;
+            public static float y = 1f;
+        }
+
+        public static class BlockBounds
+        {
+            public static class Upper
+            {
+                public static float x = 20f;
+                public static float z = 10f;
+                public static float y = 500f;
+            }
+
+            public static class Lower
+            {
+                public static float x = -20f;
+                public static float z = -10f;
+                public static float y = -2f;
+            }
+        }
+
     }
 }
