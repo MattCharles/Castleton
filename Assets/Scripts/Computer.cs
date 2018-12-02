@@ -28,6 +28,7 @@ public class Computer : MonoBehaviour, IActor
         state = ActorState.Placing;
         foreach(Block block in inventory.blocks)
         {
+            block.owner = this;
             if(Random.Range(0f, 1f) > .35f) {
                 block.state = Block.BlockState.ShootingBlock;
                 continue;
