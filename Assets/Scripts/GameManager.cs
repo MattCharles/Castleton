@@ -119,7 +119,7 @@ public class GameManager : MonoBehaviour
 
     private void EndGame()
     {
-        if(player.IsLoser() || player.inventory.GetBlockCountWithState(Block.BlockState.Placed) <= computer.inventory.GetBlockCountWithState(Block.BlockState.Placed))
+        if(player.IsLoser() || player.GetScore() <= computer.GetScore())
         {
             GameOverLosePanel.SetActive(true);
         }

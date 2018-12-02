@@ -206,7 +206,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5fc1b1d0093f4d5ca6a2a8beb742e5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  score: 0
+  player: {fileID: 0}
 --- !u!114 &18753390
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -582,7 +582,7 @@ Prefab:
     - target: {fileID: 114289224580562210, guid: 5a73f710e3464a84ca742202eebc9415,
         type: 2}
       propertyPath: state
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a73f710e3464a84ca742202eebc9415, type: 2}
@@ -933,7 +933,7 @@ Prefab:
         type: 2}
       propertyPath: inventory
       value: 
-      objectReference: {fileID: 1845350592}
+      objectReference: {fileID: 1725823457}
     - target: {fileID: 114233303863976012, guid: f1c5de12ea103144f89d909431c75f31,
         type: 2}
       propertyPath: playerCannon
@@ -1870,7 +1870,8 @@ MonoBehaviour:
     type: 2}
   state: 0
   MyPlatform: {fileID: 700833764}
-  TargetPlatform: {x: 0, y: 0, z: 0}
+  TargetPlatform: {fileID: 0}
+  ySpawnVariance: 3
   centerToSpawnEdge: 5
   Cannon: {fileID: 1468299671}
   type: 1
@@ -3329,7 +3330,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5fc1b1d0093f4d5ca6a2a8beb742e5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  score: 0
+  player: {fileID: 214006753}
 --- !u!114 &1739132961
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3614,12 +3615,6 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 00deb2a35c0ea43378e715aa8d595ac9, type: 2}
   m_IsPrefabAsset: 0
---- !u!114 &1845350592 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 114171520032132748, guid: b004719c715614c448317f7b3356edf8,
-    type: 2}
-  m_PrefabInternal: {fileID: 501317794}
-  m_Script: {fileID: 11500000, guid: 55783531a415bb14ca64f931d9c9eb77, type: 3}
 --- !u!114 &1851361729 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 114289224580562210, guid: 5a73f710e3464a84ca742202eebc9415,
