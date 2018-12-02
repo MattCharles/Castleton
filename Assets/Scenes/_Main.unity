@@ -3559,6 +3559,7 @@ Prefab:
       propertyPath: m_Shell
       value: 
       objectReference: {fileID: 1183141608068978, guid: 5a73f710e3464a84ca742202eebc9415,
+
         type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 00deb2a35c0ea43378e715aa8d595ac9, type: 2}
