@@ -39,8 +39,8 @@ public class GameManager : MonoBehaviour
     void InitGame()
     {
         CreatePlayers();
-        PlaceBlocks();
-        ShootBlocks();
+        //PlaceBlocks();
+        //ShootBlocks();
         EndGame();
     }
 
@@ -52,6 +52,7 @@ public class GameManager : MonoBehaviour
 
     private void PlaceBlocks()
     {
+        // Todo: change this
         while(player.state == ActorState.Placing || computer.state == ActorState.Placing)
         {
             if(isPlayerTurn)
@@ -108,6 +109,7 @@ public class GameManager : MonoBehaviour
             }
         }
     }
+
     private void EndGame()
     {
         if(player.IsLoser() || player.inventory.GetBlockCountWithState(Block.BlockState.Placed) <= computer.inventory.GetBlockCountWithState(Block.BlockState.Placed))
