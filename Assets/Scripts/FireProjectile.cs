@@ -1,11 +1,13 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.Common;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class FireProjectile : MonoBehaviour
 {
     public int m_PlayerNumber = 1;              // Used to identify the different players.
-    public GameObject m_Shell;                   // Prefab of the shell.
+    //done need this anymore public GameObject m_Shell;                   // Prefab of the shell (block).
     public Transform m_FireTransform;           // A child of the tank where the shells are spawned.
+    public Inventory linkedInventory;           // the inventory linked to this canon
 
     public float m_MinLaunchForce = 10f;        // The force given to the shell if the fire button is not held.
     public float m_MaxLaunchForce = 50f;        // The force given to the shell if the fire button is held for the max charge time.
@@ -55,7 +57,14 @@ public class FireProjectile : MonoBehaviour
         {
             // ... use the max force and launch the shell.
             m_CurrentLaunchForce = m_MaxLaunchForce;
-            Fire();
+
+            //try and get a projectile
+            Block nextAvailable = linkedInventory.GetFirstBlockWithState(Block.BlockState.ShootingBlock);
+            // ... launch the shell.
+            if (nextAvailable != null)
+            {
+                Fire(nextAvailable);
+            }
         }
         // Otherwise, if the fire button has just started being pressed...
         else if (Input.GetButtonDown(m_FireButton))
@@ -79,20 +88,31 @@ public class FireProjectile : MonoBehaviour
         // Otherwise, if the fire button is released and the shell hasn't been launched yet...
         else if (Input.GetButtonUp(m_FireButton) && !m_Fired)
         {
+            
+            //try and get a projectile
+            Block nextAvailable = linkedInventory.GetFirstBlockWithState(Block.BlockState.ShootingBlock);
             // ... launch the shell.
-            Fire();
+            if (nextAvailable != null)
+            {
+                Fire(nextAvailable);
+            }
+            
         }
     }
 
 
-    private void Fire()
+    private void Fire(Block block)
     {
         // Set the fired flag so only Fire is only called once.
         m_Fired = true;
 
-        // Create an instance of the shell and store a reference to it's rigidbody.
-        Rigidbody shellInstance =
-            Instantiate(m_Shell.GetComponentInChildren<Rigidbody>(), m_FireTransform.position, m_FireTransform.rotation) as Rigidbody;
+        //set block state to shot right away so you can double shoot it
+        block.state = Block.BlockState.Shot;
+        Rigidbody shellInstance = block.blockObj.GetComponentInChildren<Rigidbody>();
+
+        //move shell
+        shellInstance.transform.position = m_FireTransform.position;
+        shellInstance.transform.rotation = m_FireTransform.rotation;
 
         // Set the shell's velocity to the launch force in the fire position's forward direction.
         shellInstance.velocity = m_CurrentLaunchForce * m_FireTransform.forward;
@@ -103,5 +123,8 @@ public class FireProjectile : MonoBehaviour
 
         // Reset the launch force.  This is a precaution in case of missing button events.
         m_CurrentLaunchForce = m_MinLaunchForce;
+
+        // play fire sound
+        GameObject.FindWithTag(Constants.Tags.soundManager).GetComponent<SoundManager>().PlaySound((int)Constants.Sounds.fire);
     }
 }

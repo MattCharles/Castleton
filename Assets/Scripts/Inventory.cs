@@ -58,4 +58,18 @@ public class Inventory : MonoBehaviour
         block.state = Block.BlockState.BuildingBlock;
         return block;
     }
+
+    //TODO ^these really need to be combined to 1
+    public Block CreateShootingCube()
+    {
+        Block block = GetFirstBlockWithState(Block.BlockState.Available);
+        if (block == null)
+        {
+            Debug.Log("Couldn't");
+            return null;
+        }
+        Debug.Log("Creating Cube for Shooting");
+        block.state = Block.BlockState.ShootingBlock;
+        return block;
+    }
 }
