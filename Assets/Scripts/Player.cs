@@ -99,6 +99,6 @@ public class Player : MonoBehaviour, IActor
     public void CreateBuildingCube()
     {
         Block block = inventory.CreateBuildingCube();
-        block.transform.position = new Vector3(6f, 10f, 0f);
+        block.transform.position = new Vector3(4f, 10f, -2f);
     }
 }
