@@ -6,10 +6,10 @@ using System.Linq;
 
 public class Block : MonoBehaviour {
 
-
     bool isDestroyed;
     bool isSelected;
     GameObject blockObj;
+    public BlockState state = BlockState.Available;
 
 	// Use this for initialization
 	void Start ()
@@ -130,7 +130,9 @@ public class Block : MonoBehaviour {
         
     }
 
-
-
+    public enum BlockState
+    {
+        Available, BuildingBlock, ShootingBlock, Placed, Shot
+    }
     
 }
