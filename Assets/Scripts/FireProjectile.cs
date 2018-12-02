@@ -9,11 +9,12 @@ public class FireProjectile : MonoBehaviour
     public Transform m_FireTransform;           // A child of the tank where the shells are spawned.
     public Inventory linkedInventory;           // the inventory linked to this canon
 
-    public float m_MinLaunchForce = 10f;        // The force given to the shell if the fire button is not held.
-    public float m_MaxLaunchForce = 50f;        // The force given to the shell if the fire button is held for the max charge time.
+    public float m_MinLaunchForce = 5f;        // The force given to the shell if the fire button is not held.
+    public float m_MaxLaunchForce = 35f;        // The force given to the shell if the fire button is held for the max charge time.
     public float m_MaxChargeTime = 0.75f;       // How long the shell can charge for before it is fired at max force.
     public float m_RotationSpeed = 2f;
 
+    public Slider m_PowerSlider;              
     private string m_FireButton;                // The input axis that is used for launching shells.
     //private string m_AngleUpButton;            // The input axis that is used for adjusting fire angle
     //private string m_AngleDownButton;
@@ -26,7 +27,7 @@ public class FireProjectile : MonoBehaviour
     {
         // When the tank is turned on, reset the launch force and the UI
         m_CurrentLaunchForce = m_MinLaunchForce;
-        //m_AimSlider.value = m_MinLaunchForce;
+        m_PowerSlider.value = m_MinLaunchForce;
     }
 
 
@@ -43,7 +44,8 @@ public class FireProjectile : MonoBehaviour
 
     public void HandleInput()
     {
-        if(Input.GetKey(KeyCode.O) || Input.GetKey(KeyCode.L)) {
+        m_PowerSlider.value = m_MinLaunchForce;
+        if (Input.GetKey(KeyCode.O) || Input.GetKey(KeyCode.L)) {
             float xRotation = m_RotationSpeed;
             if(Input.GetKey(KeyCode.O)) {
                 xRotation = xRotation * -1;
@@ -51,7 +53,7 @@ public class FireProjectile : MonoBehaviour
             m_FireTransform.Rotate(xRotation, 0, 0);
         }
         // The slider should have a default value of the minimum launch force.
-        //m_AimSlider.value = m_MinLaunchForce;
+
         // If the max force has been exceeded and the shell hasn't yet been launched...
         if (m_CurrentLaunchForce >= m_MaxLaunchForce && !m_Fired)
         {
@@ -83,7 +85,7 @@ public class FireProjectile : MonoBehaviour
             // Increment the launch force and update the slider.
             m_CurrentLaunchForce += m_ChargeSpeed * Time.deltaTime;
 
-            //m_AimSlider.value = m_CurrentLaunchForce;
+            m_PowerSlider.value = m_CurrentLaunchForce;
         }
         // Otherwise, if the fire button is released and the shell hasn't been launched yet...
         else if (Input.GetButtonUp(m_FireButton) && !m_Fired)
