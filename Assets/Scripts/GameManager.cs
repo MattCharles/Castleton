@@ -17,6 +17,9 @@ public class GameManager : MonoBehaviour
 
     public bool isPlayerTurn = true; // Store whose turn
 
+    public GameObject GameOverWinPanel;
+    public GameObject GameOverLosePanel;
+
     //Awake is always called before any Start functions
     void Awake()
     {
@@ -27,6 +30,9 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
 
         DontDestroyOnLoad(gameObject);
+
+        GameOverWinPanel.SetActive(false);
+        GameOverLosePanel.SetActive(false);
 
         InitGame();
 
@@ -112,11 +118,11 @@ public class GameManager : MonoBehaviour
     {
         if(player.IsLoser() || player.inventory.GetBlockCountWithState(Block.BlockState.Placed) <= computer.inventory.GetBlockCountWithState(Block.BlockState.Placed))
         {
-            // You lose screen.
+            GameOverLosePanel.SetActive(true);
         }
         else
         {
-            // You win screen.
+            GameOverWinPanel.SetActive(true);
         }
     }
 }
