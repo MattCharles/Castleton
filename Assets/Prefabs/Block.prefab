@@ -124,6 +124,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d260d47b14a01834096f970e7fc65750, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  XZ_SPEED: 1
-  Y_SPEED: 1
-  OUT_OF_BOUNDS: -2
+  state: 0
