@@ -6,12 +6,26 @@ public class Player : MonoBehaviour, IActor
     public Inventory inventory = null;
     public ActorState state;
     public ActorType type;
+    public FireProjectile playerCannon;
+
+    public new ActorType GetType()
+    {
+        return type;
+    }
 
     void OnEnable()
     {
         TurnHandler.DonePlacing += EndPlacement;
         // TODO: We need to activate this delegate from somewhere.
-        TurnHandler.TookAShot += Shoot;
+        TurnHandler.TakeAShot += Shoot;
+    }
+
+    void Update()
+    {
+        if(this.state == ActorState.Shooting)
+        {
+            playerCannon.HandleInput();
+        }
     }
 
     public Player(Inventory inventory, ActorType type)
@@ -46,7 +60,7 @@ public class Player : MonoBehaviour, IActor
 
     public void Shoot()
     {
-        // TODO: What exactly does the UI do and stuff when the player shoots?
+        
     }
 
     public void SetType(ActorType type)

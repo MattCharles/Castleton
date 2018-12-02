@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class FireProjectile : MonoBehaviour
 {
     public int m_PlayerNumber = 1;              // Used to identify the different players.
-    public Rigidbody m_Shell;                   // Prefab of the shell.
+    public GameObject m_Shell;                   // Prefab of the shell.
     public Transform m_FireTransform;           // A child of the tank where the shells are spawned.
 
     public float m_MinLaunchForce = 10f;        // The force given to the shell if the fire button is not held.
@@ -39,9 +39,8 @@ public class FireProjectile : MonoBehaviour
     }
 
 
-    private void Update()
+    public void HandleInput()
     {
-
         if(Input.GetKey(KeyCode.O) || Input.GetKey(KeyCode.L)) {
             float xRotation = m_RotationSpeed;
             if(Input.GetKey(KeyCode.O)) {
@@ -93,7 +92,7 @@ public class FireProjectile : MonoBehaviour
 
         // Create an instance of the shell and store a reference to it's rigidbody.
         Rigidbody shellInstance =
-            Instantiate(m_Shell, m_FireTransform.position, m_FireTransform.rotation) as Rigidbody;
+            Instantiate(m_Shell.GetComponentInChildren<Rigidbody>(), m_FireTransform.position, m_FireTransform.rotation) as Rigidbody;
 
         // Set the shell's velocity to the launch force in the fire position's forward direction.
         shellInstance.velocity = m_CurrentLaunchForce * m_FireTransform.forward;
