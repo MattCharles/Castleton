@@ -1,11 +1,17 @@
-﻿using System;
+using System;
 using UnityEngine;
 
 public class Player : MonoBehaviour, IActor
 {
     public Inventory inventory = null;
     public ActorState state;
-    public ActorType type;
+
+    void OnEnable()
+    {
+        TurnHandler.DonePlacing += EndPlacement;
+        // TODO: We need to activate this delegate from somewhere.
+        TurnHandler.TookAShot += Shoot;
+    }
 
     public Player(Inventory inventory, ActorType type)
     {
@@ -16,21 +22,30 @@ public class Player : MonoBehaviour, IActor
 
     public void PlaceBlock()
     {
-
+        
     }
 
     public void EndPlacement()
     {
+        Debug.Log("Done Placing!");
         if(state != ActorState.Placing)
         {
             throw new Exception("Cannot end placement from " + state.ToString() + " state.");
         }
         state = ActorState.Shooting;
+
+        foreach(Block block in inventory.blocks)
+        {
+            if(block.state == Block.BlockState.Available)
+            {
+                block.state = Block.BlockState.ShootingBlock;
+            }
+        }
     }
 
     public void Shoot()
     {
-
+        // TODO: What exactly does the UI do and stuff when the player shoots?
     }
 
     public void SetType(ActorType type)
