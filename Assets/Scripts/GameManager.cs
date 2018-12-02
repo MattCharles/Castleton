@@ -52,8 +52,9 @@ public class GameManager : MonoBehaviour
 
     private void CreatePlayers()
     {
-        player   = player   ?? new Player(new Inventory(blockSet));
-        computer = computer ?? new Player(new Inventory(blockSet));
+        player   = player   ?? new Player(new Inventory(blockSet), ActorType.human);
+        computer = computer ?? new Player(new Inventory(blockSet), ActorType.computer);
+
     }
 
     private void PlaceBlocks()

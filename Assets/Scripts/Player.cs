@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEngine;
 
 public class Player : MonoBehaviour, IActor
@@ -13,10 +13,11 @@ public class Player : MonoBehaviour, IActor
         TurnHandler.TookAShot += Shoot;
     }
 
-    public Player(Inventory inventory)
+    public Player(Inventory inventory, ActorType type)
     {
         this.inventory = inventory;
         state = ActorState.Placing;
+        this.type = type;
     }
 
     public void PlaceBlock()
@@ -32,6 +33,7 @@ public class Player : MonoBehaviour, IActor
             throw new Exception("Cannot end placement from " + state.ToString() + " state.");
         }
         state = ActorState.Shooting;
+
         foreach(Block block in inventory.blocks)
         {
             if(block.state == Block.BlockState.Available)
@@ -44,6 +46,11 @@ public class Player : MonoBehaviour, IActor
     public void Shoot()
     {
         // TODO: What exactly does the UI do and stuff when the player shoots?
+    }
+
+    public void SetType(ActorType type)
+    {
+        this.type = type;
     }
 
     public void ShowInventory()

@@ -14,6 +14,7 @@ namespace Assets.Scripts.Common
             public static float x = 1f;
             public static float z = 1f;
             public static float y = 1f;
+            public static float r = 50f;
         }
 
         public static class BlockBounds
