@@ -17,7 +17,6 @@ public class Block : MonoBehaviour {
         blockObj = gameObject.transform.GetChild(0).gameObject;
         isDestroyed = false;
         isSelected = false;
-        GameObject.FindWithTag(Constants.Tags.soundManager).GetComponent<SoundManager>().PlaySound((int)Constants.Sounds.musicGame);
     }
 	
 	// Update is called once per frame
