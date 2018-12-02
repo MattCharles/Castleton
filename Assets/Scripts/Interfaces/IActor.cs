@@ -13,3 +13,8 @@ public enum ActorState
 {
     Placing, Shooting, doneShooting, Dead
 }
+
+public enum ActorType
+{
+    human, computer
+}

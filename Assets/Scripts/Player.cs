@@ -5,11 +5,13 @@ public class Player : MonoBehaviour, IActor
 {
     public Inventory inventory = null;
     public ActorState state;
+    public ActorType type;
 
-    public Player(Inventory inventory)
+    public Player(Inventory inventory, ActorType type)
     {
         this.inventory = inventory;
         state = ActorState.Placing;
+        this.type = type;
     }
 
     public void PlaceBlock()
@@ -29,6 +31,11 @@ public class Player : MonoBehaviour, IActor
     public void Shoot()
     {
 
+    }
+
+    public void SetType(ActorType type)
+    {
+        this.type = type;
     }
 
     public void ShowInventory()
