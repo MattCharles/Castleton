@@ -5,7 +5,7 @@ public class Cannon : MonoBehaviour
 {
     public Vector3 NozzlePosition;
     public float perscription = 1f;
-    public float explosiveness = 40f;
+    public float explosiveness = 10f;
     public float explosiveVariance = 5f;
 
     public void AIShoots(Block block, Vector3 target)
