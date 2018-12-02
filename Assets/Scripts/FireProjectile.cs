@@ -106,7 +106,7 @@ public class FireProjectile : MonoBehaviour
         // Set the fired flag so only Fire is only called once.
         m_Fired = true;
 
-        //set block state to shot right away so you can double shoot it
+        //set block state to shot right away so you can't double shoot it
         block.state = Block.BlockState.Shot;
         Rigidbody shellInstance = block.blockObj.GetComponentInChildren<Rigidbody>();
 
