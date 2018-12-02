@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using UnityEngine;
 
 namespace Assets.Scripts.Common
 {
@@ -31,6 +32,21 @@ namespace Assets.Scripts.Common
                 public static float y = -2f;
             }
         }
+
+        public static class Tags
+        {
+            public static string soundManager = "SoundManager";
+        }
+
+        public enum Sounds : int
+        {
+            fire = 0,
+            collide = 1,
+            musicMenu = 2,
+            musicGame = 3,
+            blockDestroy = 4
+        }
+
 
     }
 }

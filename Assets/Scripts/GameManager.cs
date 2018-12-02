@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;       //Allows us to use Lists. 
 using System;
 using System.Linq;
+using Assets.Scripts.Common;
 
 public class GameManager : MonoBehaviour
 {
@@ -28,6 +29,11 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         InitGame();
+
+    }
+    private void Start()
+    {
+        GameObject.FindWithTag(Constants.Tags.soundManager).GetComponent<SoundManager>().PlaySound((int)Constants.Sounds.musicGame);
     }
 
     void InitGame()
