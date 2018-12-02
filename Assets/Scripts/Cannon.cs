@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.Common;
+using UnityEngine;
 
 public class Cannon : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class Cannon : MonoBehaviour
         float force = Random.Range(explosiveness - explosiveVariance, explosiveness);
         shot.transform.LookAt(destination);
         shot.GetComponent<Rigidbody>().AddForce(destination * force);
+
+        GameObject.FindWithTag(Constants.Tags.soundManager).GetComponent<SoundManager>().PlaySound((int)Constants.Sounds.fire);
     }
 
     public void Shoot(Block block, Vector3 forceVector)
@@ -23,6 +26,8 @@ public class Cannon : MonoBehaviour
         Block shot = Instantiate(block, NozzlePosition, Quaternion.identity);
         shot.transform.LookAt(forceVector);
         shot.GetComponent<Rigidbody>().AddForce(forceVector * explosiveness);
+
+        GameObject.FindWithTag(Constants.Tags.soundManager).GetComponent<SoundManager>().PlaySound((int)Constants.Sounds.fire);
     }
 
     private Vector3 AIAim(Vector3 target)
