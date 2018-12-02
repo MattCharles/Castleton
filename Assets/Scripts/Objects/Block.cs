@@ -6,18 +6,15 @@ using System.Linq;
 
 public class Block : MonoBehaviour {
 
-
     bool isDestroyed;
     bool isSelected;
     GameObject blockObj;
+    public BlockState state = BlockState.Available;
 
 	// Use this for initialization
 	void Start ()
     {
         blockObj = gameObject.transform.GetChild(0).gameObject;
-        isDestroyed = false;
-        isSelected = false;
-
 	}
 	
 	// Update is called once per frame
@@ -130,7 +127,9 @@ public class Block : MonoBehaviour {
         
     }
 
-
-
+    public enum BlockState
+    {
+        Available, BuildingBlock, ShootingBlock, Placed, Shot
+    }
     
 }

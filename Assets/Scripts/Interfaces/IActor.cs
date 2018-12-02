@@ -2,7 +2,6 @@
 {
     void Die();
     void EndPlacement();
-    void MoveCamera();
     void PlaceBlock();
     void Shoot();
     void ShowInventory();

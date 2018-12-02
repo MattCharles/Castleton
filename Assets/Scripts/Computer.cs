@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Computer : MonoBehaviour, IActor
 {
@@ -9,17 +8,18 @@ public class Computer : MonoBehaviour, IActor
     public Vector3 TargetPlatform;
     public float centerToSpawnEdge = 5f;
     public Cannon Cannon;
-
-    public void MoveCamera()
-    {
-        // Do Fucking Nothing At All -- Ever!!!
-    }
+    
     public void PlaceBlock()
     {
         state = ActorState.Placing;
         foreach(Block block in inventory.blocks)
         {
+            if(Random.Range(0, 1) > .5f) {
+                block.state = Block.BlockState.ShootingBlock;
+                continue;
+            }
             Instantiate(block, GetRandomPlacement(), Quaternion.identity);
+            block.state = Block.BlockState.Placed;
         }
     }
 
@@ -61,7 +61,7 @@ public class Computer : MonoBehaviour, IActor
 
     public bool CanShoot()
     {
-        return true;
+        return inventory.ContainsBlocksWithState(Block.BlockState.ShootingBlock);
     }
 
     public bool IsLoser()

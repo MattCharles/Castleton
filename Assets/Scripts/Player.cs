@@ -1,9 +1,9 @@
 ﻿using System;
+using UnityEngine;
 
-public class Player : IActor
+public class Player : MonoBehaviour, IActor
 {
     public Inventory inventory = null;
-    public bool isInventoryShowing = false;
     public ActorState state;
 
     public Player(Inventory inventory)
@@ -12,14 +12,11 @@ public class Player : IActor
         state = ActorState.Placing;
     }
 
-    public void MoveCamera()
-    {
-
-    }
     public void PlaceBlock()
     {
 
     }
+
     public void EndPlacement()
     {
         if(state != ActorState.Placing)
@@ -33,15 +30,17 @@ public class Player : IActor
     {
 
     }
+
     public void ShowInventory()
     {
-        // singleton UI, if already showing don't show again.
-        isInventoryShowing = true;
+        inventory.enabled = true;
     }
+
     public void HideInventory()
     {
-        isInventoryShowing = false;
+        inventory.enabled = false;
     }
+
     public void Die()
     {
 
@@ -55,5 +54,11 @@ public class Player : IActor
     public bool IsLoser()
     {
         return ToString() == "ian";
+    }
+
+    public void CreateBuildingCube()
+    {
+        Block block = inventory.CreateBuildingCube();
+        block.transform.position = new Vector3(6f, 10f, 0f);
     }
 }

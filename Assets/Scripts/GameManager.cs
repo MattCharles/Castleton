@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
 
     public Player player   = null;  // Store a reference to player
     public Player computer = null;  // Store a reference to the computer
-    public HashSet<Block> blockSet; // Store a reference to the set of blocks
+    public List<Block> blockSet;    // Store a reference to the set of blocks
 
     public bool isPlayerTurn = true; // Store whose turn
 
@@ -104,7 +104,7 @@ public class GameManager : MonoBehaviour
     }
     private void EndGame()
     {
-        if(player.IsLoser() || player.inventory.GetBlockCount() <= computer.inventory.GetBlockCount())
+        if(player.IsLoser() || player.inventory.GetBlockCountWithState(Block.BlockState.Placed) <= computer.inventory.GetBlockCountWithState(Block.BlockState.Placed))
         {
             // You lose screen.
         }
