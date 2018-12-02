@@ -5,6 +5,7 @@ public class Player : MonoBehaviour, IActor
 {
     public Inventory inventory = null;
     public ActorState state;
+    public ActorType type;
 
     void OnEnable()
     {
