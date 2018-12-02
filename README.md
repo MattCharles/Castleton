@@ -1,3 +1,9 @@
+# Block placing controls
+- WASD/Arrow Keys: Move block along platform
+- Q/E: Rotate block
+- Z: Move block down
+- X: Move block up
+
 # THINGS TO DO
 - Main Menu
 - Game manager object
