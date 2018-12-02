@@ -9,6 +9,7 @@ public class Block : MonoBehaviour {
     bool isDestroyed;
     bool isSelected;
     bool collidedWithOpponent;
+    Color color;
     GameObject blockObj;
     public BlockState state = BlockState.Available;
     public IActor owner;
@@ -17,6 +18,8 @@ public class Block : MonoBehaviour {
 	void Start ()
     {
         blockObj = gameObject.transform.GetChild(0).gameObject;
+        color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
+        blockObj.GetComponent<Renderer>().material.color = color;
         isDestroyed = false;
         isSelected = false;
         collidedWithOpponent = false;
@@ -169,7 +172,7 @@ public class Block : MonoBehaviour {
         //TODO if ever adding hotseat this will not work
         if (owner.GetType() != ActorType.human) return;
 
-        blockObj.GetComponent<Renderer>().material.color = Color.white;
+        blockObj.GetComponent<Renderer>().material.color = color;
         blockObj.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
         isSelected = false;
 
