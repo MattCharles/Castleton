@@ -1,5 +1,7 @@
 ﻿public interface IActor
 {
+    ActorType GetType();
+
     void Die();
     void EndPlacement();
     void PlaceBlock();

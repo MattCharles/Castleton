@@ -11,7 +11,7 @@ public class Block : MonoBehaviour {
     bool collidedWithOpponent;
     GameObject blockObj;
     public BlockState state = BlockState.Available;
-    public Player owner;
+    public IActor owner;
 
 	// Use this for initialization
 	void Start ()
@@ -153,7 +153,7 @@ public class Block : MonoBehaviour {
         if (state != BlockState.BuildingBlock) return;
 
         //TODO if ever adding hotseat this will not work
-        if (owner.type != ActorType.human) return;
+        if (owner.GetType() != ActorType.human) return;
 
         blockObj.transform.rotation = Quaternion.identity;
         blockObj.GetComponent<Renderer>().material.color = Color.yellow;
@@ -167,7 +167,7 @@ public class Block : MonoBehaviour {
         if (state != BlockState.BuildingBlock) return;
 
         //TODO if ever adding hotseat this will not work
-        if (owner.type != ActorType.human) return;
+        if (owner.GetType() != ActorType.human) return;
 
         blockObj.GetComponent<Renderer>().material.color = Color.white;
         blockObj.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;

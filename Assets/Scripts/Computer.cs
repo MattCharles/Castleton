@@ -8,7 +8,13 @@ public class Computer : MonoBehaviour, IActor
     public Vector3 TargetPlatform;
     public float centerToSpawnEdge = 5f;
     public Cannon Cannon;
-    
+    public ActorType type = ActorType.computer;
+
+    public new ActorType GetType()
+    {
+        return type;
+    }
+
     public void PlaceBlock()
     {
         state = ActorState.Placing;
