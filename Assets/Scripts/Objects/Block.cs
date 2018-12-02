@@ -9,7 +9,7 @@ public class Block : MonoBehaviour {
     bool isDestroyed;
     bool isSelected;
     bool collidedWithOpponent;
-    GameObject blockObj;
+    public GameObject blockObj;
     public BlockState state = BlockState.Available;
     public IActor owner;
 
@@ -23,7 +23,7 @@ public class Block : MonoBehaviour {
 
         //TODO remove this
         //hard coding for testing
-        owner = new Player(null, ActorType.human);
+        //owner = new Player(null, ActorType.human);
     }
 	
 	// Update is called once per frame
