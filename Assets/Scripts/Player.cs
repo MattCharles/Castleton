@@ -33,6 +33,8 @@ public class Player : MonoBehaviour, IActor
         this.inventory = inventory;
         state = ActorState.Placing;
         this.type = type;
+
+        playerCannon.linkedInventory = inventory;
     }
 
     public void PlaceBlock()
@@ -60,6 +62,7 @@ public class Player : MonoBehaviour, IActor
 
     public void Shoot()
     {
+        // i think this needs to stay blank unless we move fire controls up here
         
     }
 
@@ -96,6 +99,6 @@ public class Player : MonoBehaviour, IActor
     public void CreateBuildingCube()
     {
         Block block = inventory.CreateBuildingCube();
-        block.transform.position = new Vector3(6f, 10f, 0f);
+        block.transform.position = new Vector3(4f, 10f, -2f);
     }
 }
