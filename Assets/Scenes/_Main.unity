@@ -1490,31 +1490,31 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4434667202848424, guid: b004719c715614c448317f7b3356edf8, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4434667202848424, guid: b004719c715614c448317f7b3356edf8, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 5.2
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4434667202848424, guid: b004719c715614c448317f7b3356edf8, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4434667202848424, guid: b004719c715614c448317f7b3356edf8, type: 2}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: 0.12278779
       objectReference: {fileID: 0}
     - target: {fileID: 4434667202848424, guid: b004719c715614c448317f7b3356edf8, type: 2}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0.6963643
       objectReference: {fileID: 0}
     - target: {fileID: 4434667202848424, guid: b004719c715614c448317f7b3356edf8, type: 2}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: 0.12278779
       objectReference: {fileID: 0}
     - target: {fileID: 4434667202848424, guid: b004719c715614c448317f7b3356edf8, type: 2}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.6963643
       objectReference: {fileID: 0}
     - target: {fileID: 4434667202848424, guid: b004719c715614c448317f7b3356edf8, type: 2}
       propertyPath: m_RootOrder
@@ -1809,6 +1809,14 @@ Prefab:
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 4434667202848424, guid: b004719c715614c448317f7b3356edf8, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4434667202848424, guid: b004719c715614c448317f7b3356edf8, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b004719c715614c448317f7b3356edf8, type: 2}
@@ -4845,7 +4853,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2007847708
 RectTransform:
   m_ObjectHideFlags: 0

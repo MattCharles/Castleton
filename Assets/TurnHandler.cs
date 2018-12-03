@@ -13,16 +13,12 @@ public class TurnHandler : MonoBehaviour {
 
     private void Update()
     {
-        if (player.state == ActorState.notMyTurn)
+        if (player.state == ActorState.notMyTurn ||
+           (player.state == ActorState.doneShooting && 
+            computer.CanShoot()))
         {
             StartCoroutine(WaitForAI());
         }
-        //if (player.state == ActorState.doneShooting &&
-        //    computer.state == ActorState.doneShooting)
-        //{
-        //    GameOverCanvas.SetActive(true);
-        //    GameOverWinPanel.SetActive(true);
-        //}
 
         if (!player.HasRemainingAction() && !computer.HasRemainingAction())
         {
@@ -38,21 +34,13 @@ public class TurnHandler : MonoBehaviour {
                 GameOverWinPanel.SetActive(true);
             }
         }
-
-        //if (player.IsLoser() || player.GetScore() <= computer.GetScore())
-        //{
-        //    //GameOverLosePanel.SetActive(true);
-        //}
-        //else
-        //{
-        //    //GameOverWinPanel.SetActive(true);
-        //}
     }
 
     IEnumerator WaitForAI()
     {
+        player.state = ActorState.ImGaming;
         yield return new WaitForSeconds(3f);
-        computer.Shoot();
         player.state = ActorState.Shooting;
+        computer.Shoot();
     }
 }

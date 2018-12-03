@@ -45,12 +45,22 @@ public class FireProjectile : MonoBehaviour
     public bool HandleInput()
     {
         m_PowerSlider.value = m_MinLaunchForce;
-        if (Input.GetKey(KeyCode.O) || Input.GetKey(KeyCode.L)) {
+        if (Input.GetKey(KeyCode.I) || Input.GetKey(KeyCode.K)) {
             float xRotation = m_RotationSpeed;
-            if(Input.GetKey(KeyCode.O)) {
+            if(Input.GetKey(KeyCode.I)) {
                 xRotation = xRotation * -1;
             }
             m_FireTransform.Rotate(xRotation, 0, 0);
+        }
+
+        if (Input.GetKey(KeyCode.J) || Input.GetKey(KeyCode.L))
+        {
+            float yRotation = m_RotationSpeed;
+            if (Input.GetKey(KeyCode.J))
+            {
+                yRotation = yRotation * -1;
+            }
+            m_FireTransform.Rotate(0, yRotation, 0);
         }
         // The slider should have a default value of the minimum launch force.
 
