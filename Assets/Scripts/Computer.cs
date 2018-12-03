@@ -33,7 +33,7 @@ public class Computer : MonoBehaviour, IActor
                 block.state = Block.BlockState.ShootingBlock;
                 continue;
             }
-            // Block copy = Instantiate(block, GetRandomPlacement(), Quaternion.identity);
+            
             block.transform.position = GetRandomPlacement();
             Debug.Log(block.transform.position);
             block.gameObject.SetActive(true);
