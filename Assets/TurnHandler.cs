@@ -4,9 +4,40 @@ using UnityEngine;
 
 public class TurnHandler : MonoBehaviour {
 
-    public delegate void EndPlacement();
-    public static event EndPlacement DonePlacing;
+    public Player player;
+    public Computer computer;
 
-    public delegate void TimeToShoot();
-    public static event TimeToShoot TakeAShot;
+    public GameObject GameOverWinPanel;
+    public GameObject GameOverLosePanel;
+    public GameObject GameOverCanvas;
+
+    private void Update()
+    {
+        if (player.state == ActorState.notMyTurn)
+        {
+            StartCoroutine(WaitForAI());
+        }
+        if(player.state == ActorState.doneShooting &&
+            computer.state == ActorState.doneShooting)
+        {
+            GameOverCanvas.SetActive(true);
+            GameOverWinPanel.SetActive(true);
+        }
+
+        if (player.IsLoser() || player.GetScore() <= computer.GetScore())
+        {
+            //GameOverLosePanel.SetActive(true);
+        }
+        else
+        {
+            //GameOverWinPanel.SetActive(true);
+        }
+    }
+
+    IEnumerator WaitForAI()
+    {
+        yield return new WaitForSeconds(3f);
+        computer.Shoot();
+        player.state = ActorState.Shooting;
+    }
 }

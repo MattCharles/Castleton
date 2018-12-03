@@ -42,7 +42,7 @@ public class FireProjectile : MonoBehaviour
     }
 
 
-    public void HandleInput()
+    public bool HandleInput()
     {
         m_PowerSlider.value = m_MinLaunchForce;
         if (Input.GetKey(KeyCode.O) || Input.GetKey(KeyCode.L)) {
@@ -66,6 +66,7 @@ public class FireProjectile : MonoBehaviour
             if (nextAvailable != null)
             {
                 Fire(nextAvailable);
+                return true;
             }
         }
         // Otherwise, if the fire button has just started being pressed...
@@ -97,9 +98,11 @@ public class FireProjectile : MonoBehaviour
             if (nextAvailable != null)
             {
                 Fire(nextAvailable);
+                return true;
             }
             
         }
+        return false;
     }
 
 
