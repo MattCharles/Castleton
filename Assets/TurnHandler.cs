@@ -17,21 +17,36 @@ public class TurnHandler : MonoBehaviour {
         {
             StartCoroutine(WaitForAI());
         }
-        if(player.state == ActorState.doneShooting &&
-            computer.state == ActorState.doneShooting)
+        //if (player.state == ActorState.doneShooting &&
+        //    computer.state == ActorState.doneShooting)
+        //{
+        //    GameOverCanvas.SetActive(true);
+        //    GameOverWinPanel.SetActive(true);
+        //}
+
+        if (!player.HasRemainingAction() && !computer.HasRemainingAction())
         {
             GameOverCanvas.SetActive(true);
-            GameOverWinPanel.SetActive(true);
+            
+            if (player.GetScore() < computer.GetScore())
+            {
+                GameOverLosePanel.SetActive(true);
+            }
+            //TODO add draw screen, right now draws go to player
+            else if(player.GetScore() >= computer.GetScore())
+            {
+                GameOverWinPanel.SetActive(true);
+            }
         }
 
-        if (player.IsLoser() || player.GetScore() <= computer.GetScore())
-        {
-            //GameOverLosePanel.SetActive(true);
-        }
-        else
-        {
-            //GameOverWinPanel.SetActive(true);
-        }
+        //if (player.IsLoser() || player.GetScore() <= computer.GetScore())
+        //{
+        //    //GameOverLosePanel.SetActive(true);
+        //}
+        //else
+        //{
+        //    //GameOverWinPanel.SetActive(true);
+        //}
     }
 
     IEnumerator WaitForAI()

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Inventory : MonoBehaviour
@@ -34,6 +35,19 @@ public class Inventory : MonoBehaviour
         return false;
     }
 
+    public bool ContainsBlocksWithStates(Block.BlockState[] states)
+    {
+        foreach (Block block in blocks)
+        {
+            print(block.state);
+            if (states.ToList().Contains((block.state)))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public Block GetFirstBlockWithState(Block.BlockState state)
     {
         foreach(Block block in blocks)
@@ -45,6 +59,7 @@ public class Inventory : MonoBehaviour
         }
         return null;
     }
+
 
     public Block CreateBuildingCube()
     {

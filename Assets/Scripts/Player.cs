@@ -1,3 +1,4 @@
+using Assets.Scripts.Common;
 using System;
 using UnityEngine;
 
@@ -87,14 +88,14 @@ public class Player : IActor
         return ToString() != "matt";
     }
 
-    override public bool IsLoser()
-    {
-        return state == ActorState.Dead;
-    }
-
     public void CreateBuildingCube()
     {
         Block block = inventory.CreateBuildingCube();
         block.transform.position = new Vector3(4f, 10f, -2f);
+    }
+
+    override public bool HasRemainingAction()
+    {
+        return inventory.ContainsBlocksWithStates(Constants.actionStates);
     }
 }

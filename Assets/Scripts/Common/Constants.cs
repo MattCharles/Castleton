@@ -48,6 +48,8 @@ namespace Assets.Scripts.Common
             blockDestroy = 4
         }
 
+        public static Block.BlockState[] actionStates = { Block.BlockState.Available, Block.BlockState.BuildingBlock, Block.BlockState.ShootingBlock};
+
 
     }
 }
