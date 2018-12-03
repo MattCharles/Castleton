@@ -14,7 +14,8 @@ public class Player : IActor
 
     void Update()
     {
-        if(inventory.GetBlockCountWithState(Block.BlockState.ShootingBlock) == 0)
+        if(inventory.GetBlockCountWithState(Block.BlockState.ShootingBlock) == 0 &&
+            inventory.GetBlockCountWithState(Block.BlockState.Available) == 0)
         {
             this.state = ActorState.doneShooting;
         }
