@@ -3,9 +3,9 @@ using TMPro;
 
 public class ScoreManager : MonoBehaviour {
 
-    public Player player;
+    public IActor actor;
 	// Update is called once per frame
 	public void Update() {
-        GetComponent<TextMeshProUGUI>().SetText(player.GetScore().ToString());
+        GetComponent<TextMeshProUGUI>().SetText(actor.GetScore().ToString());
 	}
 }
