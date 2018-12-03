@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 
-public class Computer : MonoBehaviour, IActor
+public class Computer : IActor
 {
-    public Inventory inventory;
     public ActorState state;
     public GameObject MyPlatform;
     public GameObject TargetPlatform;
@@ -12,7 +11,7 @@ public class Computer : MonoBehaviour, IActor
     public ActorType type = ActorType.computer;
     Vector3 PlatformCenter;
 
-    public new ActorType GetType()
+    override public ActorType GetType()
     {
         return type;
     }
@@ -23,7 +22,7 @@ public class Computer : MonoBehaviour, IActor
         PlaceBlock();
     }
 
-    public void PlaceBlock()
+    override public void PlaceBlock()
     {
         state = ActorState.Placing;
         foreach(Block block in inventory.blocks)
@@ -52,12 +51,12 @@ public class Computer : MonoBehaviour, IActor
         return new Vector3(x, y, z);
     }
 
-    public void EndPlacement()
+    override public void EndPlacement()
     {
         // Hein???
     }
 
-    public void Shoot()
+    override public void Shoot()
     {
         state = ActorState.Shooting;
         foreach(Block block in inventory.blocks)
@@ -66,12 +65,12 @@ public class Computer : MonoBehaviour, IActor
         }
     }
 
-    public void ShowInventory()
+    override public void ShowInventory()
     {
         // I don't need to!!!!!
     }
 
-    public void Die()
+    override public void Die()
     {
         state = ActorState.Dead;
     }
@@ -80,12 +79,12 @@ public class Computer : MonoBehaviour, IActor
         return false;
     }
 
-    public bool CanShoot()
+    override public bool CanShoot()
     {
         return inventory.ContainsBlocksWithState(Block.BlockState.ShootingBlock);
     }
 
-    public bool IsLoser()
+    override public bool IsLoser()
     {
         return false;
     }

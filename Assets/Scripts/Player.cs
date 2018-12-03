@@ -1,14 +1,13 @@
 using System;
 using UnityEngine;
 
-public class Player : MonoBehaviour, IActor
+public class Player : IActor
 {
-    public Inventory inventory = null;
     public ActorState state;
     public ActorType type;
     public FireProjectile playerCannon;
 
-    public new ActorType GetType()
+    override public ActorType GetType()
     {
         return type;
     }
@@ -37,12 +36,12 @@ public class Player : MonoBehaviour, IActor
         playerCannon.linkedInventory = inventory;
     }
 
-    public void PlaceBlock()
+    override public void PlaceBlock()
     {
         
     }
 
-    public void EndPlacement()
+    override public void EndPlacement()
     {
         Debug.Log("Done Placing!");
         if(state != ActorState.Placing)
@@ -60,7 +59,7 @@ public class Player : MonoBehaviour, IActor
         }
     }
 
-    public void Shoot()
+    override public void Shoot()
     {
         // i think this needs to stay blank unless we move fire controls up here
         
@@ -71,7 +70,7 @@ public class Player : MonoBehaviour, IActor
         this.type = type;
     }
 
-    public void ShowInventory()
+    override public void ShowInventory()
     {
         inventory.enabled = true;
     }
@@ -81,17 +80,17 @@ public class Player : MonoBehaviour, IActor
         inventory.enabled = false;
     }
 
-    public void Die()
+    override public void Die()
     {
 
     }
 
-    public bool CanShoot()
+    override public bool CanShoot()
     {
         return ToString() != "matt";
     }
 
-    public bool IsLoser()
+    override public bool IsLoser()
     {
         return ToString() == "ian";
     }
@@ -100,10 +99,5 @@ public class Player : MonoBehaviour, IActor
     {
         Block block = inventory.CreateBuildingCube();
         block.transform.position = new Vector3(6f, 10f, 0f);
-    }
-
-    public int GetScore()
-    {
-        return inventory.GetBlockCountWithState(Block.BlockState.Placed);
     }
 }
