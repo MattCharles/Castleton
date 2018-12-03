@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance = null; // Static instance of GameManager which allows it to be accessed by any other script.
 
     public Player player   = null;  // Store a reference to player
-    public Player computer = null;  // Store a reference to the computer
+    public Computer computer = null;  // Store a reference to the computer
     public List<Block> blockSet;    // Store a reference to the set of blocks
 
     public bool isPlayerTurn = true; // Store whose turn
@@ -33,31 +33,28 @@ public class GameManager : MonoBehaviour
 
         GameOverWinPanel.SetActive(false);
         GameOverLosePanel.SetActive(false);
-
-        InitGame();
-
     }
     private void Start()
     {
         GameObject.FindWithTag(Constants.Tags.soundManager).GetComponent<SoundManager>().PlaySound((int)Constants.Sounds.musicGame);
     }
 
-    void InitGame()
+    void Update()
     {
-        CreatePlayers();
+        //CreatePlayers();
         //PlaceBlocks();
         //ShootBlocks();
-        EndGame();
+        ProcessTurns();
     }
 
-    private void CreatePlayers()
+    /*private void CreatePlayers()
     {
         player   = player   ?? new Player(new Inventory(blockSet), ActorType.human);
-        computer = computer ?? new Player(new Inventory(blockSet), ActorType.computer);
+        computer = computer ?? new Computer(new Inventory(blockSet), ActorType.computer);
 
-    }
+    }*/
 
-    private void PlaceBlocks()
+    /*private void PlaceBlocks()
     {
         // Todo: change this
         while(player.state == ActorState.Placing || computer.state == ActorState.Placing)
@@ -91,9 +88,9 @@ public class GameManager : MonoBehaviour
         player.HideInventory();
         computer.HideInventory();
         isPlayerTurn = true; // player always gets to shoot first
-    }
+    }*/
 
-    private void ShootBlocks()
+    /*private void ShootBlocks()
     {
         while(player.state != ActorState.doneShooting || computer.state != ActorState.doneShooting)
         {
@@ -115,10 +112,16 @@ public class GameManager : MonoBehaviour
                 isPlayerTurn = true;
             }
         }
-    }
+    }*/
 
-    private void EndGame()
+    private void ProcessTurns()
     {
+        Debug.Log("I'm gaming.");
+        if(player.state == ActorState.notMyTurn)
+        {
+            computer.Shoot();
+            player.state = ActorState.Shooting;
+        }
         if(player.IsLoser() || player.GetScore() <= computer.GetScore())
         {
             GameOverLosePanel.SetActive(true);

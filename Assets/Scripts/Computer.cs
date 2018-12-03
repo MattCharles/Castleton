@@ -38,6 +38,7 @@ public class Computer : IActor
             block.gameObject.SetActive(true);
             block.state = Block.BlockState.Placed;
         }
+        state = ActorState.notMyTurn;
     }
 
     private Vector3 GetRandomPlacement()
@@ -58,11 +59,15 @@ public class Computer : IActor
 
     override public void Shoot()
     {
-        state = ActorState.Shooting;
-        foreach(Block block in inventory.blocks)
+        if(inventory.GetBlockCountWithState(Block.BlockState.ShootingBlock) == 0)
         {
-            Cannon.AIShoots(block, TargetPlatform.transform.position);
+            state = ActorState.doneShooting;
+            return;
         }
+        state = ActorState.Shooting;
+        Block block = inventory.GetFirstBlockWithState(Block.BlockState.ShootingBlock);
+        Cannon.AIShoots(block, TargetPlatform.transform.position);
+        state = ActorState.notMyTurn;
     }
 
     override public void ShowInventory()

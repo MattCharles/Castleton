@@ -12,18 +12,16 @@ public class Player : IActor
         return type;
     }
 
-    void OnEnable()
-    {
-        TurnHandler.DonePlacing += EndPlacement;
-        // TODO: We need to activate this delegate from somewhere.
-        TurnHandler.TakeAShot += Shoot;
-    }
-
     void Update()
     {
+        if(inventory.GetBlockCountWithState(Block.BlockState.ShootingBlock) == 0)
+        {
+            this.state = ActorState.doneShooting;
+        }
         if(this.state == ActorState.Shooting)
         {
-            playerCannon.HandleInput();
+            if(playerCannon.HandleInput())
+                state = ActorState.notMyTurn;
         }
     }
 
@@ -43,15 +41,14 @@ public class Player : IActor
 
     override public void EndPlacement()
     {
-        Debug.Log("Done Placing!");
-        if(state != ActorState.Placing)
-        {
-            throw new Exception("Cannot end placement from " + state.ToString() + " state.");
-        }
         state = ActorState.Shooting;
 
         foreach(Block block in inventory.blocks)
         {
+            if(block.state == Block.BlockState.BuildingBlock)
+            {
+                block.state = Block.BlockState.Placed;
+            }
             if(block.state == Block.BlockState.Available)
             {
                 block.state = Block.BlockState.ShootingBlock;
@@ -92,12 +89,12 @@ public class Player : IActor
 
     override public bool IsLoser()
     {
-        return ToString() == "ian";
+        return state == ActorState.Dead;
     }
 
     public void CreateBuildingCube()
     {
         Block block = inventory.CreateBuildingCube();
-        block.transform.position = new Vector3(6f, 10f, 0f);
+        block.transform.position = new Vector3(4f, 10f, -2f);
     }
 }
