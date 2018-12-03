@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.Common;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class Computer : IActor
 {
@@ -80,17 +82,13 @@ public class Computer : IActor
         state = ActorState.Dead;
     }
 
-    public bool IsWinner() {
-        return false;
-    }
-
     override public bool CanShoot()
     {
         return inventory.ContainsBlocksWithState(Block.BlockState.ShootingBlock);
     }
 
-    override public bool IsLoser()
+    override public bool HasRemainingAction()
     {
-        return false;
+        return inventory.ContainsBlocksWithStates(Constants.actionStates);
     }
 }

@@ -122,13 +122,16 @@ public class GameManager : MonoBehaviour
             computer.Shoot();
             player.state = ActorState.Shooting;
         }
-        if(player.IsLoser() || player.GetScore() <= computer.GetScore())
-        {
-            GameOverLosePanel.SetActive(true);
-        }
-        else
-        {
-            GameOverWinPanel.SetActive(true);
-        }
+        //if (!player.HasRemainingAction() && !computer.HasRemainingAction())
+        //{
+        //    if (player.GetScore() < computer.GetScore())
+        //    {
+        //        GameOverLosePanel.SetActive(true);
+        //    }
+        //    else
+        //    {
+        //        GameOverWinPanel.SetActive(true);
+        //    }
+        //}
     }
 }

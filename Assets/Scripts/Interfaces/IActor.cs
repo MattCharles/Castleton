@@ -9,7 +9,8 @@ public abstract class IActor : MonoBehaviour
     public abstract void Shoot();
     public abstract void ShowInventory();
     public abstract bool CanShoot();
-    public abstract bool IsLoser();
+    public abstract bool HasRemainingAction();
+
 
     public Inventory inventory;
 

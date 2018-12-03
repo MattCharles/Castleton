@@ -13,23 +13,26 @@ public class TurnHandler : MonoBehaviour {
 
     private void Update()
     {
-        if (player.state == ActorState.notMyTurn)
+        if (player.state == ActorState.notMyTurn ||
+           (player.state == ActorState.doneShooting && 
+            computer.CanShoot()))
         {
             StartCoroutine(WaitForAI());
-        }
-        if(player.state == ActorState.doneShooting &&
-            computer.state == ActorState.doneShooting)
-        {
-            GameOverCanvas.SetActive(true);
-            GameOverWinPanel.SetActive(true);
         }
 
-        if (player.state == ActorState.doneShooting && 
-            computer.CanShoot())
+        if (!player.HasRemainingAction() && !computer.HasRemainingAction())
         {
-            StartCoroutine(WaitForAI());
             GameOverCanvas.SetActive(true);
-            GameOverLosePanel.SetActive(true);
+            
+            if (player.GetScore() < computer.GetScore())
+            {
+                GameOverLosePanel.SetActive(true);
+            }
+            //TODO add draw screen, right now draws go to player
+            else if(player.GetScore() >= computer.GetScore())
+            {
+                GameOverWinPanel.SetActive(true);
+            }
         }
     }
 
