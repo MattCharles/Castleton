@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.3909017, g: 0.46438307, b: 0.5540639, a: 1}
+  m_IndirectSpecularColor: {r: 0.39090726, g: 0.46436846, b: 0.554047, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1523,62 +1523,62 @@ Prefab:
     - target: {fileID: 224233440041018252, guid: b004719c715614c448317f7b3356edf8,
         type: 2}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224233440041018252, guid: b004719c715614c448317f7b3356edf8,
         type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224233440041018252, guid: b004719c715614c448317f7b3356edf8,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 244.5
       objectReference: {fileID: 0}
     - target: {fileID: 224233440041018252, guid: b004719c715614c448317f7b3356edf8,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -52.25
       objectReference: {fileID: 0}
     - target: {fileID: 224233440041018252, guid: b004719c715614c448317f7b3356edf8,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 224233440041018252, guid: b004719c715614c448317f7b3356edf8,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 64.5
       objectReference: {fileID: 0}
     - target: {fileID: 224883797039470438, guid: b004719c715614c448317f7b3356edf8,
         type: 2}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224883797039470438, guid: b004719c715614c448317f7b3356edf8,
         type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224883797039470438, guid: b004719c715614c448317f7b3356edf8,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 354.5
       objectReference: {fileID: 0}
     - target: {fileID: 224883797039470438, guid: b004719c715614c448317f7b3356edf8,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -52.25
       objectReference: {fileID: 0}
     - target: {fileID: 224883797039470438, guid: b004719c715614c448317f7b3356edf8,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 224883797039470438, guid: b004719c715614c448317f7b3356edf8,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 64.5
       objectReference: {fileID: 0}
     - target: {fileID: 224365846235936726, guid: b004719c715614c448317f7b3356edf8,
         type: 2}
@@ -3553,9 +3553,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5acc741362a38a48af6bd3f89b23b7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NozzlePosition: {x: 0, y: 0, z: 0}
+  NozzlePosition: {x: -6, y: 0, z: 0}
   perscription: 1
-  explosiveness: 40
+  explosiveness: 100
   explosiveVariance: 5
 --- !u!4 &1468299675 stripped
 Transform:
@@ -5040,7 +5040,8 @@ Prefab:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114295217196127394, guid: 00deb2a35c0ea43378e715aa8d595ac9, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: 00deb2a35c0ea43378e715aa8d595ac9, type: 2}
   m_IsPrefabAsset: 0
 --- !u!1001 &2096947585

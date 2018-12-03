@@ -6,7 +6,7 @@ public class Cannon : MonoBehaviour
 {
     public Vector3 NozzlePosition;
     public float perscription = 1f;
-    public float explosiveness = 40f;
+    public float explosiveness = 400f;
     public float explosiveVariance = 5f;
 
     public void AIShoots(Block block, Vector3 target)
@@ -24,14 +24,7 @@ public class Cannon : MonoBehaviour
 
     public void Shoot(Block block, Vector3 forceVector)
     {
-        /*
-        block.state = Block.BlockState.Shot;
-        Block shot = Instantiate(block, NozzlePosition, Quaternion.identity);
-        shot.transform.LookAt(forceVector);
-        shot.GetComponent<Rigidbody>().AddForce(forceVector * explosiveness);
 
-        GameObject.FindWithTag(Constants.Tags.soundManager).GetComponent<SoundManager>().PlaySound((int)Constants.Sounds.fire);
-        */
     }
 
     private Vector3 AIAim(Vector3 target)

@@ -22,7 +22,7 @@ public abstract class IActor : MonoBehaviour
 
 public enum ActorState
 {
-    Placing, Shooting, notMyTurn, doneShooting, Dead, ImGaming
+    Placing, Shooting, notMyTurn, doneShooting, Dead, Waiting
 }
 
 public enum ActorType

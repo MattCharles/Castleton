@@ -110,6 +110,7 @@ public class Block : MonoBehaviour {
         {
             Destroy(blockObj);
             GameObject.FindWithTag(Constants.Tags.soundManager).GetComponent<SoundManager>().PlaySound((int)Constants.Sounds.blockDestroy);
+            state = BlockState.Dead;
             isDestroyed = true;
         }
 
@@ -182,7 +183,7 @@ public class Block : MonoBehaviour {
 
     public enum BlockState
     {
-        Available, BuildingBlock, ShootingBlock, Placed, Shot
+        Available, BuildingBlock, ShootingBlock, Placed, Shot, Dead
     }
     
 }

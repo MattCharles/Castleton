@@ -86,7 +86,7 @@ public class Player : IActor
 
     override public bool CanShoot()
     {
-        return ToString() != "matt";
+        return inventory.ContainsBlocksWithState(Block.BlockState.ShootingBlock);
     }
 
     public void CreateBuildingCube()
