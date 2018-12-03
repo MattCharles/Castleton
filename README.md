@@ -1,7 +1,7 @@
 # Block placing controls
 - Left Click and Hold: Select block
 - Release Click: Deslect block
-- WASD/Arrow Keys: Move block along platform
+- Arrow Keys: Move block along platform
 - Q/E: Rotate block
 - Z: Move block down
 - X: Move block up
