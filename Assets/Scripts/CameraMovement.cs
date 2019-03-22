@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class CameraMovement : MonoBehaviour
 {
-    public Transform target;
+    public Transform buildingPlatform;
+    public Transform shootingPosition;
+    public Transform enemyPlatform;
+    public bool playerShooting = false;
 
     public float speed = 2.0f;
     public float verticalSpeed = 13.0f;
@@ -21,19 +23,37 @@ public class CameraMovement : MonoBehaviour
     public float distanceThreshold = 13f;
 
     private Vector3 velocity = Vector3.zero;
+    private Vector3 defaultPosition = new Vector3(10, 3, 0);
+    private Vector3 targetPosition = Vector3.zero;
 
     void Update()
     {
-        transform.LookAt(target);
+        if (playerShooting)
+        {
+            //Gracefully move to shooting position
+            targetPosition = shootingPosition.position;
+            transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime);
+            transform.LookAt(enemyPlatform);
+            ShootUpdate();
+            return;
+        }
+        //TODO: Let them see where their shot goes. Then, transition the camera to view their
+        // fort as the AI shoots at it.
+        if(targetPosition == shootingPosition.position)
+        {
+            targetPosition = defaultPosition;
+            transform.position = defaultPosition;
+        }
+        transform.LookAt(buildingPlatform);
         float scroll = Input.GetAxis("Mouse ScrollWheel");
 
         if (Input.GetKey(KeyCode.D))
         {
-            transform.RotateAround(target.position, Vector3.up, -speed);
+            transform.RotateAround(buildingPlatform.position, Vector3.up, -speed);
         }
         if (Input.GetKey(KeyCode.A))
         {
-            transform.RotateAround(target.position, Vector3.up, speed);
+            transform.RotateAround(buildingPlatform.position, Vector3.up, speed);
         }
 
         if (Input.GetKey(KeyCode.S))
@@ -49,13 +69,18 @@ public class CameraMovement : MonoBehaviour
 
         if (scroll > scrollThreshold)
         {
-            transform.position = Vector3.SmoothDamp(transform.position, target.position, ref velocity, smoothTime);
+            transform.position = Vector3.SmoothDamp(transform.position, buildingPlatform.position, ref velocity, smoothTime);
         }
 
         if (scroll < -scrollThreshold)
         {
-            if (Vector3.Distance(target.position, transform.position) > distanceThreshold) { return; }
+            if (Vector3.Distance(buildingPlatform.position, transform.position) > distanceThreshold) { return; }
             transform.position -= transform.forward * zoomSpeed * Time.deltaTime;
         }
+    }
+
+    void ShootUpdate()
+    {
+
     }
 }

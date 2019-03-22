@@ -27,7 +27,7 @@ public class Computer : IActor
     override public void PlaceBlock()
     {
         state = ActorState.Placing;
-        foreach(Block block in inventory.blocks)
+        foreach(Block block in inventory.currentBlockList)
         {
             block.owner = this;
             if(Random.Range(0f, 1f) > .35f) {

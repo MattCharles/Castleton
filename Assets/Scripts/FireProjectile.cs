@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class FireProjectile : MonoBehaviour
 {
     public int m_PlayerNumber = 1;              // Used to identify the different players.
-    //done need this anymore public GameObject m_Shell;                   // Prefab of the shell (block).
+
     public Transform m_FireTransform;           // A child of the tank where the shells are spawned.
     public Inventory linkedInventory;           // the inventory linked to this canon
 
@@ -16,8 +16,7 @@ public class FireProjectile : MonoBehaviour
 
     public Slider m_PowerSlider;              
     private string m_FireButton;                // The input axis that is used for launching shells.
-    //private string m_AngleUpButton;            // The input axis that is used for adjusting fire angle
-    //private string m_AngleDownButton;
+
     private float m_CurrentLaunchForce;         // The force that will be given to the shell when the fire button is released.
     private float m_ChargeSpeed;                // How fast the launch force increases, based on the max charge time.
     private bool m_Fired;                       // Whether or not the shell has been launched with this button press.
@@ -45,18 +44,18 @@ public class FireProjectile : MonoBehaviour
     public bool HandleInput()
     {
         m_PowerSlider.value = m_MinLaunchForce;
-        if (Input.GetKey(KeyCode.I) || Input.GetKey(KeyCode.K)) {
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S)) {
             float xRotation = m_RotationSpeed;
-            if(Input.GetKey(KeyCode.I)) {
+            if(Input.GetKey(KeyCode.W)) {
                 xRotation = xRotation * -1;
             }
             m_FireTransform.Rotate(xRotation, 0, 0);
         }
 
-        if (Input.GetKey(KeyCode.J) || Input.GetKey(KeyCode.L))
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
         {
             float yRotation = m_RotationSpeed;
-            if (Input.GetKey(KeyCode.J))
+            if (Input.GetKey(KeyCode.A))
             {
                 yRotation = yRotation * -1;
             }
@@ -132,11 +131,6 @@ public class FireProjectile : MonoBehaviour
         // Set the shell's velocity to the launch force in the fire position's forward direction.
         shellInstance.velocity = m_CurrentLaunchForce * m_FireTransform.forward;
 
-        // Change the clip to the firing clip and play it.
-        //m_ShootingAudio.clip = m_FireClip;
-        //m_ShootingAudio.Play();
-
-        // Reset the launch force.  This is a precaution in case of missing button events.
         m_CurrentLaunchForce = m_MinLaunchForce;
 
         // play fire sound

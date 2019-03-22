@@ -1,5 +1,4 @@
 ﻿using Assets.Scripts.Common;
-using System.Collections;
 using UnityEngine;
 
 public class Cannon : MonoBehaviour

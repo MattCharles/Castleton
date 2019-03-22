@@ -1,5 +1,4 @@
 using Assets.Scripts.Common;
-using System;
 using UnityEngine;
 
 public class Player : IActor
@@ -7,6 +6,7 @@ public class Player : IActor
     public ActorState state;
     public ActorType type;
     public FireProjectile playerCannon;
+    public CameraMovement cameraMovement;
 
     override public ActorType GetType()
     {
@@ -22,8 +22,12 @@ public class Player : IActor
         }
         if(this.state == ActorState.Shooting)
         {
-            if(playerCannon.HandleInput())
+            cameraMovement.playerShooting = true;
+            if (playerCannon.HandleInput())
+            {
+                cameraMovement.playerShooting = false;
                 state = ActorState.notMyTurn;
+            }
         }
     }
 
@@ -45,7 +49,7 @@ public class Player : IActor
     {
         state = ActorState.Shooting;
 
-        foreach(Block block in inventory.blocks)
+        foreach(Block block in inventory.currentBlockList)
         {
             if(block.state == Block.BlockState.BuildingBlock)
             {

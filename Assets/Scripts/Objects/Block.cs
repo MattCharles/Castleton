@@ -1,14 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Assets.Scripts.Common;
-using System.Linq;
 
 public class Block : MonoBehaviour {
 
-    bool isDestroyed;
-    bool isSelected;
-    bool collidedWithOpponent;
+    bool isDestroyed = false;
+    bool isSelected = false;
+    bool collidedWithOpponent = false;
     public GameObject blockObj;
 
     Color color;
@@ -19,15 +16,8 @@ public class Block : MonoBehaviour {
 	void Start ()
     {
         blockObj = gameObject.transform.GetChild(0).gameObject;
-        color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
+        if(color==null) color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
         blockObj.GetComponent<Renderer>().material.color = color;
-        isDestroyed = false;
-        isSelected = false;
-        collidedWithOpponent = false;
-
-        //TODO remove this
-        //hard coding for testing
-        //owner = new Player(null, ActorType.human);
     }
 	
 	// Update is called once per frame
@@ -36,8 +26,6 @@ public class Block : MonoBehaviour {
         if (isDestroyed) return;
 
         CheckOutOfBounds();
-
-        //CheckClick();
 
         if (isSelected)
         {

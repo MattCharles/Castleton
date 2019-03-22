@@ -1,20 +1,27 @@
-﻿using System.Collections.Generic;
+﻿using Assets.Scripts.BlockFactories;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    public List<Block> blocks;
+    public List<Block> currentBlockList;
+    public readonly int StartingBlockCount;
+    private int _blocksRemaining;
+    private AbstractBlockFactory abstractBlockFactory;
 
     public Inventory(List<Block> blocks)
     {
-        this.blocks.AddRange(blocks);
+        currentBlockList.AddRange(blocks);
+        StartingBlockCount = blocks.Count;
+        _blocksRemaining = StartingBlockCount;
     }
 
     public int GetBlockCountWithState(Block.BlockState state)
     {
         int count = 0;
-        foreach(var block in blocks)
+        foreach(var block in currentBlockList)
         {
             if (block == null) continue;
             if(block.state == state) count += 1;
@@ -25,7 +32,7 @@ public class Inventory : MonoBehaviour
 
     public bool ContainsBlocksWithState(Block.BlockState state)
     {
-        foreach(Block block in blocks)
+        foreach(Block block in currentBlockList)
         {
             if (block.state == state)
             {
@@ -37,7 +44,7 @@ public class Inventory : MonoBehaviour
 
     public bool ContainsBlocksWithStates(Block.BlockState[] states)
     {
-        foreach (Block block in blocks)
+        foreach (Block block in currentBlockList)
         {
             print(block.state);
             if (states.ToList().Contains((block.state)))
@@ -50,7 +57,7 @@ public class Inventory : MonoBehaviour
 
     public Block GetFirstBlockWithState(Block.BlockState state)
     {
-        foreach(Block block in blocks)
+        foreach(Block block in currentBlockList)
         {
             if(block.state == state)
             {
